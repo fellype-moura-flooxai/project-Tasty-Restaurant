@@ -106,7 +106,7 @@ router.get("/login", function(req, res, next){
                 router.get("/reservations", function(req, res, next){
 
                     res.render("admin/reservations", admin.getParams(req, {
-                        date: {}
+                        data: {}
                     }));
 
                 });
