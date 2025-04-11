@@ -160,7 +160,7 @@ router.get("/login", function(req, res, next){
 
                 router.delete("/reservations/:id", function(req, res, next){
 
-                    reservations  .delete(req.params.id).then(results=>{
+                    reservations.delete(req.params.id).then(results=>{
 
                         res.send(results);
 
