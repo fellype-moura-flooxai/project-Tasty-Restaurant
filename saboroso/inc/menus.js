@@ -96,8 +96,9 @@ module.exports = {
                 resolve(results);
             }
 
-          })
-      })
+          });
+          
+      });
 
     }
 
