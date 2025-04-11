@@ -2,6 +2,14 @@ class HcodeGrid {
 
     constructor(configs){
 
+        configs.listeners = Object.assign({
+                afterUpdateClick: (e) => {
+      
+                  $('#modal-update').modal('show');
+
+                }
+            }, configs.listeners);
+        
         this.options = Object.assign({}, {
             formCreate:'#modal-create form',
             formUpdate:'#modal-update form',
@@ -42,38 +50,46 @@ class HcodeGrid {
 
     }
 
+    fireEvent(name, args){
+
+        if (typeof this.options.listeners[name] === 'function') this.options.listeners[name].apply(this, args);
+
+    }
+
     initButtons(){    
 
-[...document.querySelectorAll(this.options.btnUpdate)].forEach(btn => {
+        [...document.querySelectorAll(this.options.btnUpdate)].forEach(btn => {
 
-btn.addEventListener('click', e => {
+            btn.addEventListener('click', e => {
 
-  let tr = e.path.field(el => {
+            this.fireEvent('beforeUpdateClick', [e]);
 
-    return (el.tagName.toUpperCase() === 'TR');
+        let tr = e.path.field(el => {
 
-  });
+        return (el.tagName.toUpperCase() === 'TR');
 
-  let data = JSON.parse(tr.dataset.row);
+        });
 
- for (let name in data) {
+        let data = JSON.parse(tr.dataset.row);
 
-  let input = this.formUpdate.querySelector(`[name=${name}]`);
+            for (let name in data) {
 
-  switch (name) {
+        let input = this.formUpdate.querySelector(`[name=${name}]`);
 
-    case 'date':
-      if (input) input.value = moment(data[name]).format('YYYY-MM-DD');
-      break;
-    default:
+        switch (name) {
+
+        case 'date':
+        if (input) input.value = moment(data[name]).format('YYYY-MM-DD');
+        break;
+        default:
       
-      if (input) input.value = data[name];
+            if (input) input.value = data[name];
 
-  }
+        }
 
- }
-
- $('#modal-update').modal('show');
+        }
+           
+            this.fireEvent('afterUpdateClick', [e]);
 
   });
 
