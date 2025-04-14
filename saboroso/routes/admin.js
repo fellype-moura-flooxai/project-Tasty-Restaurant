@@ -8,8 +8,9 @@ var emails = require("./../inc/emails");
 var moment = require("moment");
 var router = express.Router();
 
+module.exports = function(io){
 
-moment.locale("pt-BR");
+    moment.locale("pt-BR");
 
 router.use(function(req, res, next){
 
@@ -52,6 +53,16 @@ router.get("/", function(req, res, next){
     });
 
 });
+
+router.get("/dashboard", function(req, res, next){
+
+    reservations.dashboard().then(data=>{
+
+        res.send(data);
+
+    });
+
+})
 
 router.post("/login", function(req, res, next){
 
@@ -98,6 +109,7 @@ router.get("/login", function(req, res, next){
 
             contacts.delete(req.params.id).then(results=>{
                 res.send(results);
+                io.emit('dashboard update');
             }).catch(err=>{
                 res.send(err);
             })
@@ -120,6 +132,7 @@ router.get("/login", function(req, res, next){
 
             emails.delte(req.params.id).then(results=>{
                 res.send(results);
+                io.emit('dashboard update');
             }).catch(err=>{
                 res.send(err);
             });
@@ -142,6 +155,7 @@ router.get("/login", function(req, res, next){
 
                     menus.save(req.fields, req.files).then(results=>{
 
+                        io.emit('dashboard update');
                         res.send(results);
 
                     }).catch(err=>{
@@ -156,6 +170,7 @@ router.get("/login", function(req, res, next){
 
                     menus.delete(req.params.id).then(results=>{
 
+                        io.emit('dashboard update');
                         res.send(results);
 
                     }).catch(err=>{
@@ -203,6 +218,7 @@ router.get("/login", function(req, res, next){
 
                     reservations.save(req.fields, req.files).then(results=>{
 
+                        io.emit('dashboard update');
                         res.send(results);
 
                     }).catch(err=>{
@@ -217,6 +233,7 @@ router.get("/login", function(req, res, next){
 
                     reservations.delete(req.params.id).then(results=>{
 
+                        io.emit('dashboard update');
                         res.send(results);
 
                     }).catch(err=>{
@@ -241,6 +258,7 @@ router.get("/login", function(req, res, next){
 
                             users.save(req.fields).then(results=>{
 
+                                io.emit('dashboard update');
                                 res.send(results);
  
                             }).catch(err=>{
@@ -269,6 +287,7 @@ router.get("/login", function(req, res, next){
 
                                 users.delete(req.params.id).then(results=>{
 
+                                    io.emit('dashboard update');
                                     res.send(results);
     
                                 }).catch(err=>{
@@ -279,4 +298,6 @@ router.get("/login", function(req, res, next){
                             
                                 });
 
-module.exports = router;
+    return router;
+
+};
