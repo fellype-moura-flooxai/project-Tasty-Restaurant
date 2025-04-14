@@ -190,10 +190,26 @@ router.get("/login", function(req, res, next){
 
                             }).catch(err=>{
 
-                                res.send(err);
+                                res.send({
+                                    error: err
+                                });
 
                             });
                         
+                            });
+
+                            router.post("/user/password-change", function(req, res, next){
+
+                                users.changePassword(req).then(results=>{
+
+                                    res.send(results);
+    
+                                }).catch(err=>{
+    
+                                    res.send(err);
+    
+                                });
+
                             });
 
                             router.delete("//:id", function(req, res, next){
