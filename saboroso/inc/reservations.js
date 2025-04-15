@@ -1,5 +1,5 @@
 var conn = require("./db")
-var Pagination = require("./..inc/Pagination");
+var Pagination = require("./Pagination");
 var moment = require("moment");
 const { dashboard } = require("./admin");
 
@@ -96,14 +96,17 @@ module.exports = {
              ${(dtstart && dtend) ? 'WHERE date BETWEEN ? AND ?' : ''}
              ORDER BY name LIMIT ?, ?
             `,
-            params
+            [
+                dtstart, 
+                dtend
+            ]
         );
 
         pag.getPage(page).then(data => {
 
             resolve({
                 data,
-                links: page.getNavigation(req.query)
+                links: pag.getNavigation(req.query)
             });
 
         });
@@ -118,7 +121,7 @@ module.exports = {
   
           conn.query(`
               DELETE FROM tb_reservations WHERE id = ? 
-            `[
+            `,[
               id
             ], (err, results)=>{
   
@@ -138,7 +141,7 @@ module.exports = {
 
         return new Promise((resolve, reject)=>{
 
-            conn.query(`'
+            conn.query(`
                   SELECT
 	CONCAT(YEAR(date), '_', MONTH(date)) AS date,
     COUNT(*) AS total,
@@ -184,7 +187,7 @@ module.exports = {
 
         return new Promise((resolve, reject)=>{
 
-               connect.query(`
+               conn.query(`
                        SELECT
                        (SELECT COUNT(*) FROM tb_contacts) AS nrcontacts,
                        (SELECT COUNT(*) FROM tb_menus) AS nrmenus,

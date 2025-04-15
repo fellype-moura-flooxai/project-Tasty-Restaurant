@@ -65,7 +65,7 @@ module.exports = {
             {
                 text: "Reservas",
                 href: "/admin/reservations",
-                icon: "calender-check-o",
+                icon: "calendar-check-o",
                 active:false
             },
             {

@@ -116,7 +116,7 @@ router.get('/services', function(req, res, next ){
     title: 'Serviços - Restaurante Saboroso!',
     background: 'images/img_bg_1.jpg',
       h1: 'É um prazer poder servir!'
-  });;
+  });
 
 });
 

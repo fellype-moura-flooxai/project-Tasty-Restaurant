@@ -97,10 +97,10 @@
 
         fetch('/admin/dashboard').then(response => response.json()).then(json=>{
 
-          document.querySelector("nrreservations").innerHTML = json.nrreservations;
-          document.querySelector("nrcontacts").innerHTML = json.nrcontacts;
-          document.querySelector("nrmenus").innerHTML = json.nrmenus;
-          document.querySelector("nrusers").innerHTML = json.nrusers;
+          document.querySelector("#nrreservations").innerHTML = json.nrreservations;
+          document.querySelector("#nrcontacts").innerHTML = json.nrcontacts;
+          document.querySelector("#nrmenus").innerHTML = json.nrmenus;
+          document.querySelector("#nrusers").innerHTML = json.nrusers;
 
         });
 

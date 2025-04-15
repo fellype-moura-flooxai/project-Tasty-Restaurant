@@ -1,7 +1,7 @@
 var express = require('express');
 var users = require("./../inc/users")
 var admin = require("./../inc/admin");
-var menus = require("./../inc/menus")
+var menus = require("./../inc/menus");
 var reservations = require("./../inc/reservations");
 var contacts = require("./../inc/contacts");
 var emails = require("./../inc/emails");
@@ -130,7 +130,7 @@ router.get("/login", function(req, res, next){
 
         router.delete("/emails/:id", function(req, res, next){
 
-            emails.delte(req.params.id).then(results=>{
+            emails.delete(req.params.id).then(results=>{
                 res.send(results);
                 io.emit('dashboard update');
             }).catch(err=>{
@@ -269,7 +269,7 @@ router.get("/login", function(req, res, next){
                         
                             });
 
-                            router.post("/user/password-change", function(req, res, next){
+                            router.post("/users/password-change", function(req, res, next){
 
                                 users.changePassword(req).then(results=>{
 

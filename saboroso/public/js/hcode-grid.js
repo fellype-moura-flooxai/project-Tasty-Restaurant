@@ -5,32 +5,32 @@ class HcodeGrid {
         configs.listeners = Object.assign({
                 afterUpdateClick: (e) => {
       
-                  $('#modal-update').modal('show');
+                  $('#modal-update').modal('show')
 
                 },
                 afterDeleteClick: (e) => {
       
-                    wndoiw.location.reload();
+                  window.location.reload()
   
                   },
                   afterFormCreate: (e) =>{
 
-                    window.location.reload();
+                    window.location.reload()
 
                   },
                   afterFormUpdate: (e) =>{
 
-                    window.location.reload();
+                    window.location.reload()
 
                   }, 
                   afterFormCreateError: (e) =>{
 
-                    alert('Não foi possivel enviar o formulario.');
+                    alert('Não foi possivel enviar o formulario.')
 
                   }, 
                   afterFormUpdateError: (e) =>{
 
-                    alert('Não foi possivel enviar o formulario.');
+                    alert('Não foi possivel editar o formulario.')
                     
                   }
             }, configs.listeners);
@@ -68,7 +68,7 @@ class HcodeGrid {
           failure:()=>{
             this.fireEvent('afterFormCreateError');
           }
-        });
+        })
 
       }
         
@@ -91,17 +91,17 @@ class HcodeGrid {
 
     fireEvent(name, args){
 
-        if (typeof this.options.listeners[name] === 'function') this.options.listeners[name].apply(this, args);
+        if (typeof this.options.listeners[name] === 'function') this.options.listeners[name].apply(this, args)
 
     }
 
     getTrData(e){
 
-        let tr = e.path.field(el => {
+        let tr = e.path.find(el => {
 
             return (el.tagName.toUpperCase() === 'TR');
     
-            });
+            })
     
             return JSON.parse(tr.dataset.row);
 
@@ -121,7 +121,8 @@ class HcodeGrid {
            
             this.fireEvent('afterUpdateClick', [e]);
 
-    }
+    } 
+    
     btnDeleteClick(e){
 
       this.fireEvent('beforeDeleteClick');
@@ -156,13 +157,13 @@ class HcodeGrid {
 
               this.btnUpdateClick(e);
 
-            } else if (e.target.classList.contains(this.options.btnUpdate)) {
+            } else if (e.target.classList.contains(this.options.btnDelete)) {
 
               this.btnDeleteClick(e);
 
             } else {
 
-              this.fireEvent('buttonClick' [e.target, this.getTrData(e), e]);
+              this.fireEvent('buttonClick', [e.target, this.getTrData(e), e]);
 
             }
 

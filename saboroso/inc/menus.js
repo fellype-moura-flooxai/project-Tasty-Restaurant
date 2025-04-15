@@ -28,7 +28,7 @@ module.exports = {
 
         let query, queryPhoto = '', params = [
           fields.title,
-          fields.desciption,
+          fields.description,
           fields.price
         ];
 
@@ -86,7 +86,7 @@ module.exports = {
 
         conn.query(`
             DELETE FROM tb_menus WHERE id = ? 
-          `[
+          `, [
             id
           ], (err, results)=>{
 

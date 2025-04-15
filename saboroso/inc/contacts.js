@@ -64,7 +64,7 @@ module.exports = {
   
           conn.query(`
               DELETE FROM tb_contacts WHERE id = ? 
-            `[
+            `, [
               id
             ], (err, results)=>{
   

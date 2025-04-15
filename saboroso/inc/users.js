@@ -1,4 +1,4 @@
-var conn = require("./db");
+var conn = require('./db');
 
 module.exports = {
 
@@ -79,7 +79,7 @@ module.exports = {
           query = `
           UPDATE tb_users
           SET name = ?,
-              email = ?,
+              email = ?
           WHERE id = ?
           `;
 
@@ -114,7 +114,7 @@ module.exports = {
 
         conn.query(`
             DELETE FROM tb_users WHERE id = ? 
-          `[
+          `,[
             id
           ], (err, results)=>{
 
@@ -132,7 +132,7 @@ module.exports = {
 
       return new Promise((resolve, reject)=>{
 
-        if (req.fields.password) {
+        if (!req.fields.password) {
           reject("Preencha a senha.");
         } else if (req.fields.password !== req.fields.passwordConfirm) {
             reject("Confirme a senha corretamente.");

@@ -82,7 +82,7 @@ class Pagination {
             nrend = this.getTotalPages();
         } else {
             nrstart = this.getCurrentPage() - parseInt(limitPageNav / 2);
-            nrstart = this.getCurrentPage() + parseInt(limitPageNav/ 2);
+            nrend = this.getCurrentPage() + parseInt(limitPageNav/2);
         }
 
         if (this.getCurrentPage() > 1) {

@@ -29,9 +29,8 @@ app.use(function(req, res, next){
   req.body = {};
 
   if (req.method === 'POST') {
-
     
-    var form = formidable.IncomingForm({
+    var form = new formidable.IncomingForm({
       uploadDir:path.join(__dirname, "/public/images"),
       keepExtensions:true
     });
@@ -96,4 +95,3 @@ http.listen(3000, function(){
 
 });
 
-module.exports = app;
