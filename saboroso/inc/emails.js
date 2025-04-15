@@ -28,9 +28,8 @@ getEmails(){
 
             conn.query(`
                 DELETE FROM tb_emails WHERE id = ?
-                `, [
-                    id
-                ], (err, results)=>{
+                `, 
+                [id], (err, results)=>{
 
                     if (err) {
                         reject(err);
